@@ -1,0 +1,23 @@
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.activa {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.resuelta {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.caducada {
+  background: #fee2e2;
+  color: #991b1b;
+}

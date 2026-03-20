@@ -1,0 +1,88 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: #1e293b;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.collapsed {
+  width: 60px;
+}
+
+.expanded {
+  width: 240px;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  border: none;
+  background: transparent;
+  color: #e2e8f0;
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 0 18px;
+  flex-shrink: 0;
+}
+
+.toggleBtn:hover {
+  background: #334155;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navItem:hover {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+.navItemActive {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.navItemActive:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+.icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.label {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.labelVisible {
+  opacity: 1;
+}
