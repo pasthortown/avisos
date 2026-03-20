@@ -414,6 +414,9 @@ td {
 
 
 						--/*		ENVIO DE CORREO GENERAL		*/
+						-- INSERT notificación consolidada
+						INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+						VALUES ('A', 'Ausencias', 'pa_permisosconsecutivos', @asunto, @HTML, @destinatarios, @fi, @ff);
 						EXEC msdb.dbo.sp_send_dbmail 
 						@profile_name='Informacion_Nomina',
 						@recipients= @destinatarios, 		
@@ -518,6 +521,9 @@ td {
 												--SET @archivo = N''+ convert(varchar(12),GETDATE(), 105) + ' - PermisosDiasLibresConsecutivos.csv';
 												---- SET @archivo = N'PermisosDiasLibres.csv';
 
+												-- INSERT notificación consolidada
+												INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+												VALUES ('A', 'Ausencias', 'pa_permisosconsecutivos', @asunto, @HTML, @w, @ANALISTA, @fi, @ff);
 												EXEC msdb.dbo.sp_send_dbmail 
 												@profile_name='Informacion_Nomina',
 												 @recipients = @ANALISTA,
@@ -562,6 +568,9 @@ td {
 							+N'<br/><br />'
 							+N' </body>' 
 
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+							VALUES ('A', 'Ausencias', 'pa_permisosconsecutivos', @asunto, @HTML, @w, @destinatarios, @fi, @ff);
 							EXEC msdb.dbo.sp_send_dbmail 
 							@profile_name='Informacion_Nomina',
 						 	@recipients= @destinatarios, 
@@ -579,6 +588,9 @@ td {
 							+N'<br/><br />'
 							+N' </body>' 
 
+						-- INSERT notificación consolidada
+						INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+						VALUES ('A', 'Ausencias', 'pa_permisosconsecutivos', @asunto, @HTML, @w, 'pasante.nominadosec@kfc.com.ec', @fi, @ff);
 						EXEC msdb.dbo.sp_send_dbmail 
 							@profile_name='Informacion_Nomina',
 							-- @recipients= 'pasante.nominadosec@kfc.com.ec', 	

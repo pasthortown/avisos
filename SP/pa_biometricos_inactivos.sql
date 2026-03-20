@@ -537,6 +537,9 @@ BEGIN
 									declare @html varchar(max)= @htmlE + ' ' +@html1 + ' ' + @html2 + ' ' + @html3 + ' ' + @html4 + ' ' + @html5 + ' ' + @html6
 									SELECT @html AS '-'
 									begin
+											-- INSERT notificación consolidada
+											INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios)
+											VALUES ('A', 'Biométricos', 'pa_biometricos_inactivos', @asunto, @html, @tiene6, @destinatarios);
 											exec msdb.dbo.Sp_send_dbmail
 											@profile_name = 'Informacion_Nomina',  
 											@Subject = @asunto,
@@ -558,6 +561,9 @@ BEGIN
 
 										if @html1 is not null 
 										begin
+											-- INSERT notificación consolidada
+											INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios)
+											VALUES ('A', 'Biométricos', 'pa_biometricos_inactivos', @asunto, @html1, @tiene6, @destinatarios);
 											exec msdb.dbo.Sp_send_dbmail
 												@profile_name = 'Informacion_Nomina', 
 												@Subject = @asunto,

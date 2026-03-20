@@ -175,6 +175,9 @@ BEGIN
 							-- SET @archivo = N'Reingresos.csv';
 
 							/*		ENVIO DE CORREO GENERAL		*/
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+							VALUES ('A', 'Trabajadores', 'pa_colaboradores_reingresos', @asunto, @HTML, @destinatarios);
 							EXEC msdb.dbo.sp_send_dbmail 
 							@profile_name='Informacion_Nomina',
 							@recipients= @destinatarios, 		
@@ -214,6 +217,9 @@ BEGIN
 								+N'<br/><br />'
 								+N' </body>' 
 			
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+							VALUES ('A', 'Trabajadores', 'pa_colaboradores_reingresos', @asunto, @HTML, 'pasante.nominadosec@kfc.com.ec');
 							EXEC msdb.dbo.sp_send_dbmail 
 								@profile_name='Informacion_Nomina',
 								-- @recipients= 'pasante.nominadosec@kfc.com.ec', 	

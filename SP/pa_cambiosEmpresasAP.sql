@@ -91,6 +91,9 @@ Declare @mesNombre varchar(20)
    -- @Mensaje  = @html;  
   
   
+ -- INSERT notificación consolidada
+ INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, destinatariosCc)
+ VALUES ('A', 'Cambios', 'pa_cambiosEmpresasAP', @asunto, @html, @correo, @correoSoporte);
  exec msdb.dbo.Sp_send_dbmail    
      @profile_name = 'Informacion_Nomina',      
      @Subject = @asunto,    
@@ -99,6 +102,9 @@ Declare @mesNombre varchar(20)
      @body_format= 'html',    
      @body = @html       
     
+  -- INSERT notificación consolidada
+  INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+  VALUES ('A', 'Cambios', 'pa_cambiosEmpresasAP', @asunto, @html, @correoSoporte);
   exec msdb.dbo.Sp_send_dbmail    
      @profile_name = 'Informacion_Nomina',      
      @Subject = @asunto,    

@@ -131,6 +131,9 @@ BEGIN
 		SELECT @TransactionName = 'AlertaFaltantesCaja';  
 		BEGIN TRAN @TransactionName;  
 		BEGIN TRY
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, destinatariosCc, periodoInicio, periodoFin)
+			VALUES ('A', 'Créditos Tienda', 'pa_faltantecaja', @Asunto, @Body, @Dirigido, @CopiaOculta, @fi, @ff);
 			EXEC msdb.dbo.Sp_send_dbmail
 			@profile_name = 'Informacion_Nomina',
 			@Subject = @Asunto,

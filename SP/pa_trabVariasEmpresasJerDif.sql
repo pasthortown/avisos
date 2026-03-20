@@ -95,6 +95,9 @@ BEGIN
     N'<p>Por favor no responder a este correo, en caso de que requiera informaci&oacute;n adicional, comun&iacute;quese con el &Aacute;rea de N&oacute;mina.</p> ' +
     N'<p style="font-family:Calibri"><strong>Soporte NOMINA</strong></p></body>' ;
 	 
+   -- INSERT notificación consolidada
+   INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, destinatariosCc)
+   VALUES ('A', 'Trabajadores', 'pa_trabVariasEmpresasJerDif', 'Avisos trabajadores en varias empresas con jefe 2 diferente', @cuerpo, @w, @dirigido, @copia);
    exec msdb.dbo.Sp_send_dbmail
      @profile_name = 'Informacion_Nomina',  
      @Subject = 'Avisos trabajadores en varias empresas con jefe 2 diferente',
@@ -181,6 +184,9 @@ BEGIN
 	
    
 
+   -- INSERT notificación consolidada
+   INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, destinatariosCc)
+   VALUES ('A', 'Trabajadores', 'pa_trabVariasEmpresasJerDif', 'Avisos trabajadores en varias empresas con jefe 1 diferente', @cuerpo, @w, @dirigido, @copia);
    exec msdb.dbo.Sp_send_dbmail
      @profile_name = 'Informacion_Nomina',  
      @Subject = 'Avisos trabajadores en varias empresas con jefe 1 diferente',

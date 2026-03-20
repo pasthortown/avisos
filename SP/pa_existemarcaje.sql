@@ -76,6 +76,9 @@ BEGIN
 	INSERT INTO Avisos.cantidad_marcajes (fecha, hora, total_marcaje)
 	SELECT @fecha, CONVERT(VARCHAR(30), CONVERT(TIME, @Aux_fecha_hora)), @w;
 	
+	-- INSERT notificación consolidada
+	INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, destinatariosCc)
+	VALUES ('A', 'Marcajes', 'pa_existemarcaje', @asunto, @body, @Conteo_marcajes, @Dirigido, @copia);
 	EXEC msdb.dbo.Sp_send_dbmail
 	@profile_name = 'Informacion_Nomina',
 	@Subject = @asunto,

@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { HiOutlineMenu } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
+import { BiSortAlt2 } from 'react-icons/bi';
+import { FiSettings } from 'react-icons/fi';
 import styles from './Sidebar.module.css';
 
 const navItems = [
   { to: '/', label: 'Dashboard', icon: <MdDashboard /> },
+  { to: '/priorizacion', label: 'Priorización', icon: <BiSortAlt2 /> },
+  { to: '/gestion', label: 'Gestión', icon: <FiSettings /> },
 ];
 
 export default function Sidebar() {

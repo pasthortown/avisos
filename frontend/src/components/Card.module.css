@@ -1,23 +1,49 @@
 .card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 0.95rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.3rem;
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--border-color);
+  transition: background 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.card:hover::before {
+  background: var(--accent-blue);
 }
 
 .label {
-  font-size: 0.8rem;
-  color: #64748b;
-  font-weight: 500;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
 }
 
 .value {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: var(--font-size-kpi);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
 }

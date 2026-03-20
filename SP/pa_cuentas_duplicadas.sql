@@ -192,6 +192,9 @@ BEGIN
 				if @html1 is not null or @html2 is not null 
 					declare @html varchar(max)=@htmlE + ' ' +@html1 + ' ' + @html2
 					begin
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios)
+							VALUES ('A', 'Cuentas Bancarias', 'pa_cuentas_duplicadas', @asunto, @html, @tiene2, @destinatarios);
 							exec msdb.dbo.Sp_send_dbmail
 							@profile_name = 'Informacion_Nomina',  
 							@Subject = @asunto,
@@ -215,6 +218,9 @@ BEGIN
 
 						if @html1 is not null
 						begin
+						-- INSERT notificación consolidada
+						INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios)
+						VALUES ('A', 'Cuentas Bancarias', 'pa_cuentas_duplicadas', @asunto, @html1, @tiene2, @destinatarios);
 						exec msdb.dbo.Sp_send_dbmail
 							@profile_name = 'Informacion_Nomina', 
 							@Subject = @asunto,

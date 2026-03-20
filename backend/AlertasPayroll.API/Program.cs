@@ -39,11 +39,40 @@ else
         ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found and DB environment variables are not set.");
 }
 
-// Configure Entity Framework Core with SQL Server
+// Build connection string for local SQL Server (gestion)
+var localDbServer = Environment.GetEnvironmentVariable("LOCAL_DB_SERVER") ?? "sqlserver-local";
+var localDbUser = Environment.GetEnvironmentVariable("LOCAL_DB_USER") ?? "sa";
+var localDbPassword = Environment.GetEnvironmentVariable("LOCAL_DB_PASSWORD") ?? "";
+var localDbName = Environment.GetEnvironmentVariable("LOCAL_DB_NAME") ?? "AlertasPayroll_Local";
+var localConnectionString = $"Server=tcp:{localDbServer},1433;Initial Catalog={localDbName};User ID={localDbUser};Password={localDbPassword};Encrypt=False;TrustServerCertificate=True;Connection Timeout=30;";
+
+// CORS permisivo para desarrollo
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+// Configure Entity Framework Core - Azure DB (solo lectura, notificaciones)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+// Configure Entity Framework Core - Local DB (lectura/escritura, gestión)
+builder.Services.AddDbContext<GestionDbContext>(options =>
+    options.UseSqlServer(localConnectionString));
+
 var app = builder.Build();
+
+// Ensure local database and tables are created
+using (var scope = app.Services.CreateScope())
+{
+    var gestionDb = scope.ServiceProvider.GetRequiredService<GestionDbContext>();
+    gestionDb.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 // Swagger habilitado siempre (no solo en Development)
@@ -53,6 +82,8 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Alertas Payroll API v1");
     options.RoutePrefix = "swagger";
 });
+
+app.UseCors();
 
 app.UseAuthorization();
 

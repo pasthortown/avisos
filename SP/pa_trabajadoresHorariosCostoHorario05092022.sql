@@ -182,6 +182,9 @@ BEGIN
 			N'<br/><br />'+
 			N' </body>'  
  
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+			VALUES ('A', 'Horarios', 'pa_trabajadoresHorariosCostoHorario05092022', 'Alerta - asociados, horarios y costo de horario', @HTML, 'pasante.nominadosec@kfc.com.ec', @fecha_ini, @fecha_fin);
 			EXEC msdb.dbo.sp_send_dbmail 
 				@profile_name='Informacion_Nomina',
 				--@recipients= 'pasante.nominadosec@kfc.com.ec', 
@@ -232,6 +235,9 @@ BEGIN
 			N'<br/><br />'+
 			N' </body>'  
  
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+			VALUES ('A', 'Horarios', 'pa_trabajadoresHorariosCostoHorario05092022', 'Alerta - asociados, horarios y costo de horario', @HTML, 'pasante.nominadosec@kfc.com.ec', @fecha_ini, @fecha_fin);
 			EXEC msdb.dbo.sp_send_dbmail 
 				@profile_name='Informacion_Nomina',
 				--@recipients= 'pasante.nominadosec@kfc.com.ec', 
@@ -257,6 +263,9 @@ BEGIN
 			N'<p  style="  color: #000000;    font-family:''Trebuchet MS'';    font-size: 12px;">Mensaje: '+@ErrorMessage+'</p>' +
 			N'<br>'
 
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+		VALUES ('A', 'Horarios', 'pa_trabajadoresHorariosCostoHorario05092022', 'ERROR en Alerta - asociados, horarios y costo de horario', @HTML, 'pasante.nominadosec@kfc.com.ec', @fecha_ini, @fecha_fin);
 		EXEC msdb.dbo.sp_send_dbmail 
 			@profile_name='Informacion_Nomina',
 			--@recipients= 'pasante.nominadosec@kfc.com.ec', 

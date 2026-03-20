@@ -247,6 +247,9 @@ SELECT @cont_ausencias = COUNT(1) FROM @ausencias
 						N'<br/><br/>' +
 						N'</body>' 
 
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+		VALUES ('A', 'Ausencias', 'pa_errorAusencia', 'ERROR EN AUSENCIAS', @HTML, @cont_ausencias, @destinatarios, @fecha_ini, @fecha_fin);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = 'ERROR EN AUSENCIAS',
@@ -295,6 +298,9 @@ SELECT @cont_ausencias = COUNT(1) FROM @ausencias
 						N'<H4><font color="SteelBlue">Fecha: '+convert(varchar(12),GETDATE(),103)+'</H4>'+
 						N'<H4><font color="SteelBlue">No se encontraron trabajadores con error en las ausencias.</H4>'
 						
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+		VALUES ('A', 'Ausencias', 'pa_errorAusencia', 'ERROR EN AUSENCIAS', @HTML, @cont_ausencias, @destinatarios, @fecha_ini, @fecha_fin);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = 'ERROR EN AUSENCIAS',
@@ -443,6 +449,9 @@ SELECT @cont_ausencias = COUNT(1) FROM @ausencias
 					N'<br/><br />'+
 					N' </body>' 
 
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+			VALUES ('A', 'Ausencias', 'pa_errorAusencia', 'ERROR EN VACACIONES', @HTML, @haspv, @destinatarios, @fecha_ini, @fecha_fin);
 			EXEC msdb.dbo.Sp_send_dbmail
 
 			@profile_name = 'Informacion_Nomina',
@@ -492,6 +501,9 @@ SELECT @cont_ausencias = COUNT(1) FROM @ausencias
 					N'<H4><font color="SteelBlue">Fecha: '+convert(varchar(12),GETDATE(),103)+'</H4>'+
 					N'<H4><font color="SteelBlue">No se encontraron trabajadores con error en las vacaciones.</H4>'
 
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+			VALUES ('A', 'Ausencias', 'pa_errorAusencia', 'ERROR EN VACACIONES', @HTML, @haspv, @destinatarios, @fecha_ini, @fecha_fin);
 			EXEC msdb.dbo.Sp_send_dbmail
 			@profile_name = 'Informacion_Nomina',
 			@Subject = 'ERROR EN VACACIONES',

@@ -49,6 +49,9 @@ BEGIN
 		INSERT DB_NOMKFC.Logs.log_envio_correo (fecha, correo, html, modulo, referencia_02, referencia_01)
 		SELECT GETDATE(), @Dirigido, @body, 'Carga Familiar, Impuesto a la Renta', SUBSTRING(@referencia_02, 1, 499), SUBSTRING(@asunto, 1, 149); 
 
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+		VALUES ('A', 'Cargas Familiares', 'pa_cargafamiliarimpuestoalarenta', @asunto, @body, @Dirigido);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,

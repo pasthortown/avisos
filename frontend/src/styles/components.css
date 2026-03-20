@@ -1,0 +1,548 @@
+/* ═══════════════════════════════════════════════════════════════
+   CX Performance - Componentes Reutilizables
+   Grupo KFC - Sistema de Diseno Estandarizado
+   Version: 1.2.0
+
+   Este archivo documenta TODOS los componentes CSS usados en
+   el dashboard. Importar tokens.css antes de este archivo.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Reset Base ────────────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   1. HEADER
+   Sticky top, fondo secundario, flex between
+   ═══════════════════════════════════════════════════════════════ */
+.header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.6rem var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+}
+
+.header h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.version-badge {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  padding: 0.15rem 0.45rem;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-blue);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-sm);
+  vertical-align: middle;
+  margin-left: 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. BOTONES
+   .btn           - base
+   .btn-primary   - accion principal (azul)
+   .btn-secondary - accion secundaria (gris)
+   .btn-sm        - variante pequena
+   .btn-icon      - solo icono (32x32)
+   .btn-invgate   - boton especial con gradiente
+   ═══════════════════════════════════════════════════════════════ */
+.btn {
+  border: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  font-family: inherit;
+  transition: opacity var(--transition-base);
+}
+.btn:hover { opacity: 0.85; }
+.btn-primary { background: var(--accent-blue); color: white; }
+.btn-secondary { background: var(--border-color); color: var(--text-secondary); }
+.btn-sm { padding: 0.2rem 0.5rem; font-size: 0.65rem; }
+
+.btn-icon {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 32px; height: 32px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+.btn-icon:hover {
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+}
+
+.btn-invgate {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.55rem 1.2rem;
+  margin-bottom: var(--space-lg);
+  background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+.btn-invgate:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ═══════════════════════════════════════════════════════════════
+   3. KPI CARDS
+   .kpi-row       - grid container auto-fit
+   .kpi-card      - card individual con borde top animado
+   .kpi-clickable - variante clickeable (cursor pointer)
+   .kpi-label     - titulo uppercase
+   .kpi-value     - numero grande + color modifiers
+   .kpi-sub       - subtexto descriptivo
+   .kpi-trend     - indicador de tendencia (up/down/neutral)
+   ═══════════════════════════════════════════════════════════════ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--kpi-min-width), 1fr));
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 0.95rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Barra de acento superior */
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--border-color);
+  transition: background 0.3s;
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+.kpi-card:hover::before { background: var(--accent-blue); }
+
+.kpi-clickable { cursor: pointer; }
+
+.kpi-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kpi-value {
+  font-size: var(--font-size-kpi);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.kpi-sub { font-size: 0.62rem; color: var(--text-secondary); }
+
+/* Color modifiers para kpi-value */
+.kpi-value.blue   { color: var(--accent-blue); }
+.kpi-value.green  { color: var(--accent-green); }
+.kpi-value.yellow { color: var(--accent-yellow); }
+.kpi-value.red    { color: var(--accent-red); }
+.kpi-value.purple { color: var(--accent-purple); }
+.kpi-value.cyan   { color: var(--accent-cyan); }
+
+.kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+.kpi-trend.up      { color: var(--accent-red); }
+.kpi-trend.down    { color: var(--accent-green); }
+.kpi-trend.neutral { color: var(--text-muted); }
+
+/* ═══════════════════════════════════════════════════════════════
+   4. CHART CARDS
+   .dashboard-grid - grid 3 columnas
+   .chart-card     - contenedor de grafico
+   .span-2/.span-3 - variantes de ancho
+   ═══════════════════════════════════════════════════════════════ */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: var(--grid-gap);
+  padding: 0 var(--space-xl) var(--space-xl);
+}
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition-slow), box-shadow var(--transition-slow);
+}
+.chart-card:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+
+.chart-card.span-2 { grid-column: span 2; }
+.chart-card.span-3 { grid-column: span 3; }
+
+.chart-card h3 {
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chart-container {
+  position: relative;
+  flex: 1;
+  min-height: 280px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. TABS
+   .tab-nav - contenedor horizontal
+   .tab-btn - boton individual (border-bottom activo)
+   ═══════════════════════════════════════════════════════════════ */
+.tab-nav {
+  display: flex;
+  gap: 0;
+  padding: 0 var(--space-xl);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 0.7rem 1.25rem;
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-base);
+  font-family: inherit;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--text-secondary); }
+.tab-btn.active {
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ═══════════════════════════════════════════════════════════════
+   6. BADGES
+   .badge         - base pill
+   .badge-{level} - colores por nivel
+   .badge-sla-*   - SLA especificos
+   ═══════════════════════════════════════════════════════════════ */
+.badge {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Prioridad */
+.badge-low      { background: rgba(34, 197, 94, 0.15);  color: #22c55e; }
+.badge-medium   { background: rgba(234, 179, 8, 0.15);  color: #eab308; }
+.badge-high     { background: rgba(249, 115, 22, 0.15); color: #f97316; }
+.badge-urgent   { background: rgba(239, 68, 68, 0.15);  color: #ef4444; }
+.badge-critical { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+
+/* Tier/Nivel */
+.badge-mesa   { background: rgba(6, 182, 212, 0.15);   color: #06b6d4; }
+.badge-campo  { background: rgba(234, 179, 8, 0.15);   color: #eab308; }
+.badge-nivel3 { background: rgba(168, 85, 247, 0.15);  color: #a855f7; }
+.badge-cab    { background: rgba(249, 115, 22, 0.15);  color: #f97316; }
+.badge-infra  { background: rgba(59, 130, 246, 0.15);  color: #3b82f6; }
+.badge-otros  { background: rgba(100, 116, 139, 0.15); color: #94a3b8; }
+
+/* SLA */
+.badge-sla-ok     { background: rgba(34, 197, 94, 0.15);  color: #22c55e; }
+.badge-sla-risk   { background: rgba(234, 179, 8, 0.15);  color: #eab308; }
+.badge-sla-breach { background: rgba(239, 68, 68, 0.15);  color: #ef4444; }
+
+/* ═══════════════════════════════════════════════════════════════
+   7. TABLAS
+   .data-table    - tabla estandar
+   .modal-table   - tabla dentro de modal
+   .clickable-row - fila clickeable
+   ═══════════════════════════════════════════════════════════════ */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-lg);
+}
+
+.data-table th {
+  text-align: left;
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.05em;
+}
+
+.data-table td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.data-table tr:hover td { background: rgba(59, 130, 246, 0.05); }
+
+.clickable-row { cursor: pointer; }
+.clickable-row:hover td { color: var(--accent-blue); }
+
+/* ═══════════════════════════════════════════════════════════════
+   8. MODALES
+   .modal-overlay - fondo oscuro
+   .modal         - contenedor principal
+   .modal-header  - titulo + boton cerrar
+   .modal-body    - contenido scrollable
+   .detail-grid   - grid 2 columnas para detalles
+   ═══════════════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  padding: var(--space-2xl);
+}
+.modal-overlay.visible { display: flex; }
+
+.modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 950px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-modal);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none; border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  line-height: 1;
+}
+.modal-close:hover { color: var(--text-primary); }
+
+.modal-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.detail-item label {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+.detail-item span {
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. FORMULARIOS / FILTROS
+   .filter-panel  - panel colapsable
+   .filter-row    - grid de filtros
+   .filter-group  - label + input/select
+   ═══════════════════════════════════════════════════════════════ */
+.filter-panel {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: none;
+  padding: 0 var(--space-xl);
+}
+.filter-panel.open {
+  display: block;
+  padding: 0.75rem var(--space-xl);
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--filter-min-width), 1fr));
+  gap: 0.6rem 0.75rem;
+  align-items: end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.filter-group label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+.filter-group input[type="date"],
+.filter-group select {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-family: inherit;
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   10. CHIPS / PRESETS
+   .ms-preset-chip - chip seleccionable (pill style)
+   ═══════════════════════════════════════════════════════════════ */
+.ms-preset-chip {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-blue);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-full);
+  padding: 0.15rem 0.55rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.ms-preset-chip:hover {
+  background: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   11. INDICADORES DE ESTADO
+   .status-dot - circulo pulsante (sync)
+   .spinner    - loading circular
+   .error-banner - barra de error
+   ═══════════════════════════════════════════════════════════════ */
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  padding: 0.6rem var(--space-xl);
+  font-size: var(--font-size-xl);
+  display: none;
+}
+.error-banner.visible { display: block; }
+
+/* ═══════════════════════════════════════════════════════════════
+   12. RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 1200px) {
+  .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+  .chart-card.span-3 { grid-column: span 2; }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .chart-card.span-2, .chart-card.span-3 { grid-column: span 1; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .detail-grid { grid-template-columns: 1fr; }
+}

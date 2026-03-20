@@ -1,0 +1,41 @@
+.tableCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 1.1rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+  color: var(--text-muted);
+  font-size: var(--font-size-base);
+}
+
+.errorBanner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  padding: 0.6rem var(--space-xl);
+  font-size: var(--font-size-xl);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.notifInfo {
+  font-size: var(--font-size-base);
+  color: var(--text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.notifInfo strong {
+  color: var(--text-secondary);
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-sm) 0;
+}

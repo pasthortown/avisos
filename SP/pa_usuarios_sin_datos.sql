@@ -157,6 +157,9 @@ BEGIN
 							IF @htmlGeneral is not null  
 								SELECT @HTML = @htmlE + ' ' +@htmlGeneral 
 								BEGIN
+										-- INSERT notificación consolidada
+										INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+										VALUES ('A', 'Trabajadores', 'pa_usuarios_sin_datos', @asunto, @HTML, @destinatarios, @fi, @ff);
 										EXEC msdb.dbo.sp_send_dbmail 
 											@profile_name='Informacion_Nomina',
 										 	@recipients= @destinatarios, 
@@ -181,6 +184,9 @@ BEGIN
 					+N'<br/><br />'
 					+N' </body>' 
 
+					-- INSERT notificación consolidada
+					INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+					VALUES ('A', 'Trabajadores', 'pa_usuarios_sin_datos', @asunto, @HTML, 'pasante.nominadosec@kfc.com.ec', @fi, @ff);
 					EXEC msdb.dbo.sp_send_dbmail 
 					@profile_name='Informacion_Nomina',
 					--@recipients= 'pasante.nominadosec@kfc.com.ec', 	

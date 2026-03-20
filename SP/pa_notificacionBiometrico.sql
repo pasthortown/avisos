@@ -69,6 +69,9 @@ BEGIN
 				IF (ISNULL(@ad_cor_descripcioncco, '') <> '' AND ISNULL(@ad_cor_analista, '') <> '')
 				--SELECT @HTML = @htmlE + ' ' +@htmlGeneral 
 				BEGIN
+					-- INSERT notificación consolidada
+					INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, destinatariosCc)
+					VALUES ('A', 'Biométricos', 'pa_notificacionBiometrico', @var_correo_asunto, @var_correo_body, @ad_cor_analista, @var_correo_copia_oculta);
 					EXEC msdb.dbo.sp_send_dbmail 
 						@profile_name ='Informacion_Nomina',
 					 	@recipients = @ad_cor_analista, 

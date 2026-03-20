@@ -99,6 +99,9 @@ BEGIN
     --                     from DB_NOMKFC.catalogos.centro_costos C where esLocal = ''S'' and
     --                      (select puesto from DB_NOMKFC.rrhh.vw_datosTrabajadores T where T.codigo  = C.jefe1) not in  (select valor from DB_NOMKFC.configuracion.parametros where parametro  = ''cargo_gteTienda'')
     --                      and estatus = 1'
+    -- INSERT notificación consolidada
+    INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, destinatariosCc)
+    VALUES ('A', 'Jerarquías', 'pa_cargosgtesjefoprTiendasMal', 'Listado de CCO con jefe 1 cuyo cargo es diferente al parámetro “cargo_gteTienda”) ', @cuerpo, @w, @dirigido, @copia);
     EXEC msdb.dbo.Sp_send_dbmail @profile_name = 'Informacion_Nomina'
         , @Subject = 'Listado de CCO con jefe 1 cuyo cargo es diferente al parámetro “cargo_gteTienda”) '
         , @recipients = @dirigido
@@ -179,6 +182,9 @@ BEGIN
     --                    from DB_NOMKFC.catalogos.centro_costos C where esLocal = ''S'' and
     --                     (select puesto from DB_NOMKFC.rrhh.vw_datosTrabajadores T where T.codigo  = C.jefe2) not in  (select valor from DB_NOMKFC.configuracion.parametros where parametro  = ''cargo_gteTienda'')
     --                     and estatus = 1'
+    -- INSERT notificación consolidada
+    INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, destinatariosCc)
+    VALUES ('A', 'Jerarquías', 'pa_cargosgtesjefoprTiendasMal', 'Listado de CCO con jefe 2 cuyo cargo es diferente al parámetro “cargo_gteTienda”) ', @cuerpo, @w, @dirigido, @copia);
     EXEC msdb.dbo.Sp_send_dbmail @profile_name = 'Informacion_Nomina'
         , @Subject = 'Listado de CCO con jefe 2 cuyo cargo es diferente al parámetro “cargo_gteTienda”) '
         , @recipients = @dirigido

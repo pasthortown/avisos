@@ -381,6 +381,9 @@ IF( SELECT COUNT(Codigo) FROM [Adam_Consolidados].[dbo].[TB_Trabajadores_Mes]  W
 					if @html1 is not null or @html2 is not null or @html3 is not null or @html4 is not null
 						declare @html varchar(max)= @htmlE + ' ' +@html1 + ' ' + @html2 + ' ' + @html3 + ' ' + @html4
 						begin
+								-- INSERT notificación consolidada
+								INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios)
+								VALUES ('A', 'Trabajadores', 'pa_TrabajadoresValidacion', @asunto, @html, @tiene4, @destinatarios);
 								exec msdb.dbo.Sp_send_dbmail
 								@profile_name = 'Informacion_Nomina',  
 								@Subject = @asunto,
@@ -403,6 +406,9 @@ IF( SELECT COUNT(Codigo) FROM [Adam_Consolidados].[dbo].[TB_Trabajadores_Mes]  W
 
 							if @html1 is not null 
 							begin
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios)
+							VALUES ('A', 'Trabajadores', 'pa_TrabajadoresValidacion', @asunto, @html1, @tiene4, @destinatarios);
 							exec msdb.dbo.Sp_send_dbmail
 								@profile_name = 'Informacion_Nomina', 
 								@Subject = @asunto,

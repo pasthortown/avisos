@@ -169,6 +169,9 @@ BEGIN
 						-- SET @archivo = N'CargasFamiliaresEstadoCivilMal.csv';
 
 			/*		ENVIO DE CORREO			*/
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+			VALUES ('A', 'Cargas Familiares', 'pa_cargasFamiliaresEstadoCivilConyugue', @asunto, @HTML, @destinatarios, @fi, @ff);
 			EXEC msdb.dbo.sp_send_dbmail 
 				@profile_name='Informacion_Nomina',
 				@recipients= @destinatarios, 
@@ -191,6 +194,9 @@ BEGIN
 
 
 			/*		ENVIO DE CORREO			*/
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+			VALUES ('A', 'Cargas Familiares', 'pa_cargasFamiliaresEstadoCivilConyugue', @asunto, @HTML, @destinatarios, @fi, @ff);
 			EXEC msdb.dbo.sp_send_dbmail 
 				@profile_name='Informacion_Nomina',
 				@recipients= @destinatarios, 		

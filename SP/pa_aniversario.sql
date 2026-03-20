@@ -139,20 +139,30 @@ BEGIN
 		BEGIN TRAN @TransactionName;  
 		BEGIN TRY
 		IF @aux_correoPersonal != '' AND @aux_correoJefe1 != ''
+		BEGIN
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+			VALUES ('A', 'Aniversarios', 'pa_aniversario', @asunto, @body, @Dirigido);
 			EXEC msdb.dbo.Sp_send_dbmail
 			@profile_name = 'Informacion_Nomina',
 			@Subject = @asunto,
 			@recipients = @Dirigido,
 		 	@body_format= 'html',
 			@body = @body;
-		ELSE 
+		END
+		ELSE
+		BEGIN
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+			VALUES ('A', 'Aniversarios', 'pa_aniversario', @asunto, @body, @Dirigido);
 			EXEC msdb.dbo.Sp_send_dbmail
 			@profile_name = 'Informacion_Nomina',
 			@Subject = @asunto,
-			@recipients = @Dirigido, 
+			@recipients = @Dirigido,
 			@body_format= 'html',
 			@body = @body;
 			COMMIT TRANSACTION  @TransactionName;
+		END
 		END TRY
 		BEGIN CATCH
 			ROLLBACK TRANSACTION @TransactionName;

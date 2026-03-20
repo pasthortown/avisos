@@ -1,10 +1,22 @@
-import { AlertStatus } from '../types';
+import { EstadoNotificacion, ESTADO_LABELS } from '../types';
 import styles from './StatusBadge.module.css';
 
 interface Props {
-  status: AlertStatus;
+  status: EstadoNotificacion;
 }
 
+const STATUS_CLASS: Record<EstadoNotificacion, string> = {
+  A: styles.activa,
+  P: styles.enProceso,
+  R: styles.resuelta,
+  C: styles.caducada,
+  E: styles.error,
+};
+
 export default function StatusBadge({ status }: Props) {
-  return <span className={`${styles.badge} ${styles[status]}`}>{status}</span>;
+  return (
+    <span className={`${styles.badge} ${STATUS_CLASS[status]}`}>
+      {ESTADO_LABELS[status]}
+    </span>
+  );
 }

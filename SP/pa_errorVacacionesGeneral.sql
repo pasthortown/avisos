@@ -431,6 +431,9 @@ SET DATEFORMAT dmy;
 					SELECT @HTML = CONCAT(@html, N' </body>')
 					 
 			BEGIN TRY
+				-- INSERT notificación consolidada
+				INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+				VALUES ('A', 'Vacaciones', 'pa_errorVacacionesGeneral', @asunto, @HTML, @destinatarios, @fi, @ff);
 				EXEC msdb.dbo.Sp_send_dbmail
 
 				@profile_name = 'Informacion_Nomina',
@@ -486,6 +489,9 @@ SET DATEFORMAT dmy;
 					N'<H4><font color="SteelBlue">Fecha: '+convert(varchar(12),GETDATE(),103)+'</H4>'+
 					N'<H4><font color="SteelBlue">No se encontraron trabajadores con error en las vacaciones.</H4>'+
 					N'<br/><br/>'
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+			VALUES ('A', 'Vacaciones', 'pa_errorVacacionesGeneral', @asunto, @HTML, @destinatarios, @fi, @ff);
 			EXEC msdb.dbo.Sp_send_dbmail
 
 			@profile_name = 'Informacion_Nomina',

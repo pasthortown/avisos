@@ -325,6 +325,9 @@ BEGIN
 								+N' </body>') 
 
 						/*		ENVIO DE CORREO GENERAL		*/
+						-- INSERT notificación consolidada
+						INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+						VALUES ('A', 'Trabajadores', 'pa_colaboradores_expatriados', @asunto, @HTML, @destinatarios);
 						EXEC msdb.dbo.sp_send_dbmail 
 							@profile_name='Informacion_Nomina',
 							@recipients= @destinatarios, 		
@@ -410,6 +413,9 @@ BEGIN
 							+N' </body>' 
 
 							/*		ENVIO DE CORREO GENERAL		*/
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+							VALUES ('A', 'Trabajadores', 'pa_colaboradores_expatriados', @asunto, @HTML, @destinatarios);
 							EXEC msdb.dbo.sp_send_dbmail 
 								@profile_name='Informacion_Nomina',
 								@recipients= @destinatarios, 		
@@ -433,6 +439,9 @@ BEGIN
 								+N'<br/><br />'
 								+N' </body>' 
 			
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+							VALUES ('A', 'Trabajadores', 'pa_colaboradores_expatriados', @asunto, @HTML, @destinatarios);
 							EXEC msdb.dbo.sp_send_dbmail 
 								@profile_name='Informacion_Nomina',
 							 	@recipients= @destinatarios, 

@@ -1,3 +1,4 @@
+using AlertasPayroll.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlertasPayroll.API.Data;
@@ -8,4 +9,6 @@ public class ApplicationDbContext : DbContext
         : base(options)
     {
     }
+
+    public DbSet<NotificacionConsolidada> NotificacionesConsolidadas { get; set; }
 }

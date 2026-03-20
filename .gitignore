@@ -10,6 +10,9 @@ node_modules/
 ## Frontend build output
 frontend/dist/
 
+## SQL Server data
+data/
+
 ## .NET
 bin/
 obj/

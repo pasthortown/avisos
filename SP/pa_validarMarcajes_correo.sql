@@ -129,6 +129,9 @@ BEGIN
 		SELECT @TransactionName = 'AlertaAdminisMarcaje';  
 		BEGIN TRAN @TransactionName;  
 		BEGIN TRY
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+			VALUES ('A', 'Marcajes', 'pa_validarMarcajes_correo', @Asunto, @Body, @Dirigido);
 			EXEC msdb.dbo.Sp_send_dbmail
 			@profile_name = 'Informacion_Nomina',
 			@Subject = @Asunto,

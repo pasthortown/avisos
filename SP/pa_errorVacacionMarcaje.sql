@@ -143,6 +143,9 @@ BEGIN
 							N'<br/><br/>' +
 							N'</body>' 
 
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+		VALUES ('A', 'Vacaciones', 'pa_errorVacacionMarcaje', @asunto, @HTML, @destinatarios, @fi, @ff);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,
@@ -186,6 +189,9 @@ BEGIN
 							N'<H3><font color="SteelBlue">Fecha: '+convert(varchar(12),GETDATE(),103)+'</H3>'+
 							N'<H3><font color="SteelBlue">No se encontraron trabajadores con marcajes erroneos en fechas de vacación o marcajes de vacación fuera de fechas de vacación.</H3>'
 
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+		VALUES ('A', 'Vacaciones', 'pa_errorVacacionMarcaje', @asunto, @HTML, @destinatarios, @fi, @ff);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,

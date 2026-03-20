@@ -31,6 +31,9 @@ BEGIN
 						INNER JOIN RRHH.vw_datosTrabajadores dt ON a.trabajador = dt.Trabajador AND dt.Compania = a.compania
 						WHERE Error = 'SI' AND ciclo_laboral > '20132014'
 						FOR XML PATH('tr'), TYPE) AS varchar(max)))
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+		VALUES ('A', 'Vacaciones', 'pa_erroresVacacionesSinDetalle', @asunto, @HTML, @destinatarios);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,
@@ -74,6 +77,9 @@ BEGIN
 							N'<H3><font color="SteelBlue">Fecha: '+convert(varchar(12),GETDATE(),103) + '</H3>'+
 							N'<H3><font color="SteelBlue">No se encontraron trabajadores con vacaciones con saldos sin información en programación.</H3>'
 					
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+		VALUES ('A', 'Vacaciones', 'pa_erroresVacacionesSinDetalle', @asunto, @HTML, @destinatarios);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,

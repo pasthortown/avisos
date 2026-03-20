@@ -92,6 +92,9 @@ BEGIN
 						td = fecha_fin_pre,''
 						FROM #tmp_valida_vacacionsol
 						FOR XML PATH('tr'), TYPE) AS varchar(max)))
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio)
+		VALUES ('A', 'Vacaciones', 'pa_erroresSolVacvsSolVacPre', @asunto, @HTML, @destinatarios, @fi);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,
@@ -138,6 +141,9 @@ BEGIN
 							N'<div style="font-size: 16px; color: black;">Fecha: ' + convert(varchar(12),GETDATE(),103) + '</div>' 
 							
 					
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio)
+		VALUES ('A', 'Vacaciones', 'pa_erroresSolVacvsSolVacPre', @asunto, @HTML, @destinatarios, @fi);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,

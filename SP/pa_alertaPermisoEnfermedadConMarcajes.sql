@@ -63,6 +63,9 @@ BEGIN
         ).value('.', 'NVARCHAR(MAX)') +
         N'</table>';
 		
+        -- INSERT notificación consolidada
+        INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+        VALUES ('A', 'Ausencias', 'pa_alertaPermisoEnfermedadConMarcajes', 'Permisos por enfermedad u hospitalización con marcajes', @Body, 'smosquera@sipecom.com');
         EXEC msdb.dbo.sp_send_dbmail
             @profile_name = 'Informacion_Nomina',
             @recipients = 'smosquera@sipecom.com',

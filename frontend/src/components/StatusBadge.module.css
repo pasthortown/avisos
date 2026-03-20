@@ -1,23 +1,33 @@
 .badge {
   display: inline-block;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 0.78rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
   font-weight: 600;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 .activa {
-  background: #dcfce7;
-  color: #166534;
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--accent-green);
 }
 
 .resuelta {
-  background: #dbeafe;
-  color: #1e40af;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-blue);
+}
+
+.enProceso {
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--accent-purple);
 }
 
 .caducada {
-  background: #fee2e2;
-  color: #991b1b;
+  background: rgba(234, 179, 8, 0.15);
+  color: var(--accent-yellow);
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--accent-red);
 }

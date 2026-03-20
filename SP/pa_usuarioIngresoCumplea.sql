@@ -113,6 +113,9 @@ CREATE PROCEDURE [Avisos].[pa_usuarioIngresoCumplea]
 				if @html1 is not null 
 					declare @html varchar(max)= @htmlE + ' ' +@html1 
 					begin
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios)
+							VALUES ('A', 'Aniversarios', 'pa_usuarioIngresoCumplea', @asunto, @html, @tiene1, @destinatarios);
 							exec msdb.dbo.Sp_send_dbmail
 							@profile_name = 'Informacion_Nomina',  
 							@Subject = @asunto,
@@ -134,6 +137,9 @@ CREATE PROCEDURE [Avisos].[pa_usuarioIngresoCumplea]
 
 						if @html1 is not null 
 						begin
+						-- INSERT notificación consolidada
+						INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios)
+						VALUES ('A', 'Aniversarios', 'pa_usuarioIngresoCumplea', @asunto, @html1, @tiene1, @destinatarios);
 						exec msdb.dbo.Sp_send_dbmail
 							@profile_name = 'Informacion_Nomina', 
 							@Subject = @asunto,

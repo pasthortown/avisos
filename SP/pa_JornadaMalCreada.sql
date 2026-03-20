@@ -250,6 +250,9 @@ SELECT @CONT = COUNT(1) FROM @Jorn_error_usadas
 						N' </body>'  
 		
 
+												-- INSERT notificación consolidada
+												INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+												VALUES ('A', 'Horarios', 'pa_JornadaMalCreada', @asunto, @HTML, @CONT, @Dirigido, @fecha_ini, @fecha_fin);
 												EXEC msdb.dbo.Sp_send_dbmail
 												@profile_name = 'Informacion_Nomina',
 												@Subject = @asunto,
@@ -263,6 +266,9 @@ SELECT @CONT = COUNT(1) FROM @Jorn_error_usadas
 		select @body = referencia_06  FROM Configuracion.parametros WHERE parametro = 'AL_Jornadas';
 		SELECT @body = REPLACE (@body, '@fecha_hora', CONVERT(varchar, @Aux_fecha_hora,9) ) 
 
+										-- INSERT notificación consolidada
+										INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+										VALUES ('A', 'Horarios', 'pa_JornadaMalCreada', @asunto, @body, @CONT, @Dirigido, @fecha_ini, @fecha_fin);
 										EXEC msdb.dbo.Sp_send_dbmail
 										@profile_name = 'Informacion_Nomina',
 										@Subject = @asunto,

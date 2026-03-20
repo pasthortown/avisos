@@ -144,6 +144,9 @@ BEGIN
 					N'<br/><br />'+
 					N' </body>'
 									
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+		VALUES ('A', 'Transferencias', 'pa_transferencias_vencidas', @asunto, @html, @destinatarios, @fi, @ff);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,
@@ -244,6 +247,9 @@ BEGIN
 					N'</table>' + 
 					N'<br/><br />'+
 					N' </body>'
+					-- INSERT notificación consolidada
+					INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+					VALUES ('A', 'Transferencias', 'pa_transferencias_vencidas', @asunto, @html, @w, @ANALISTA, @fi, @ff);
 					EXEC msdb.dbo.Sp_send_dbmail
 					@profile_name = 'Informacion_Nomina',
 					@Subject = @asunto,

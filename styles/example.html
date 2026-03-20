@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CX Performance - Guia de Estilos v1.2.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    /* Estilos solo para la guia */
+    .guide-section {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .guide-section h2 {
+      font-size: 1.1rem;
+      color: var(--accent-blue);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .guide-section p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .guide-subsection {
+      margin-bottom: 2rem;
+    }
+    .guide-subsection h3 {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+    }
+    .swatch {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .swatch-color {
+      height: 60px;
+    }
+    .swatch-info {
+      padding: 0.5rem 0.6rem;
+      background: var(--bg-secondary);
+    }
+    .swatch-info .name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .swatch-info .var {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+    .swatch-info .hex {
+      font-size: 0.6rem;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .type-label {
+      width: 120px;
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+    .spacing-demo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .spacing-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .spacing-visual {
+      background: rgba(59, 130, 246, 0.3);
+      border: 1px solid var(--accent-blue);
+      border-radius: 2px;
+    }
+    .spacing-name {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .code-block {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      color: var(--accent-green);
+      overflow-x: auto;
+      margin-top: 0.5rem;
+      line-height: 1.6;
+    }
+    .inline-code {
+      background: var(--bg-primary);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 0.7rem;
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HEADER DE LA GUIA
+       ═══════════════════════════════════════════════════════════ -->
+  <header class="header">
+    <h1>CX Design System <span class="version-badge">v1.2.0</span></h1>
+    <div class="header-right">
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.7rem;color:var(--text-secondary);">
+        <div class="status-dot"></div>
+        <span>Guia de Estilos</span>
+      </div>
+      <button class="btn-icon">&#9881;</button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       1. PALETA DE COLORES
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>1. Paleta de Colores</h2>
+    <p>Todos los colores se definen como CSS custom properties en <span class="inline-code">tokens.css</span>. Usar siempre la variable, nunca el hex directo.</p>
+
+    <div class="guide-subsection">
+      <h3>Fondos</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#0f172a;"></div>
+          <div class="swatch-info"><div class="name">Primary</div><div class="var">--bg-primary</div><div class="hex">#0f172a</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#1e293b;"></div>
+          <div class="swatch-info"><div class="name">Secondary / Card</div><div class="var">--bg-secondary</div><div class="hex">#1e293b</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#334155;"></div>
+          <div class="swatch-info"><div class="name">Border</div><div class="var">--border-color</div><div class="hex">#334155</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-subsection">
+      <h3>Texto</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#f1f5f9;"></div>
+          <div class="swatch-info"><div class="name">Primary</div><div class="var">--text-primary</div><div class="hex">#f1f5f9</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#94a3b8;"></div>
+          <div class="swatch-info"><div class="name">Secondary</div><div class="var">--text-secondary</div><div class="hex">#94a3b8</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#64748b;"></div>
+          <div class="swatch-info"><div class="name">Muted</div><div class="var">--text-muted</div><div class="hex">#64748b</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-subsection">
+      <h3>Acentos</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#3b82f6;"></div>
+          <div class="swatch-info"><div class="name">Blue (Primario)</div><div class="var">--accent-blue</div><div class="hex">#3b82f6</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#22c55e;"></div>
+          <div class="swatch-info"><div class="name">Green (Exito)</div><div class="var">--accent-green</div><div class="hex">#22c55e</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#eab308;"></div>
+          <div class="swatch-info"><div class="name">Yellow (Alerta)</div><div class="var">--accent-yellow</div><div class="hex">#eab308</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#ef4444;"></div>
+          <div class="swatch-info"><div class="name">Red (Error)</div><div class="var">--accent-red</div><div class="hex">#ef4444</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#a855f7;"></div>
+          <div class="swatch-info"><div class="name">Purple (Info)</div><div class="var">--accent-purple</div><div class="hex">#a855f7</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#06b6d4;"></div>
+          <div class="swatch-info"><div class="name">Cyan (Secundario)</div><div class="var">--accent-cyan</div><div class="hex">#06b6d4</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#f97316;"></div>
+          <div class="swatch-info"><div class="name">Orange (Warning)</div><div class="var">--accent-orange</div><div class="hex">#f97316</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       2. TIPOGRAFIA
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>2. Tipografia</h2>
+    <p>Font: <strong>Inter</strong> (Google Fonts). Fallback: -apple-system, BlinkMacSystemFont, sans-serif.</p>
+
+    <div class="type-row">
+      <span class="type-label">--font-size-kpi<br>1.7rem / 800</span>
+      <span style="font-size:1.7rem;font-weight:800;letter-spacing:-0.02em;color:var(--accent-blue);">1,248</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">--font-size-h1<br>1rem / 600</span>
+      <span style="font-size:1rem;font-weight:600;">CX Performance Dashboard</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">--font-size-h2<br>0.95rem / 600</span>
+      <span style="font-size:0.95rem;font-weight:600;">Titulo de Modal</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">--font-size-xl<br>0.82rem / 400</span>
+      <span style="font-size:0.82rem;">Texto de detalle, botones especiales</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">--font-size-lg<br>0.78rem / 400</span>
+      <span style="font-size:0.78rem;">Celdas de tabla, tabs de navegacion</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">--font-size-md<br>0.75rem / 500</span>
+      <span style="font-size:0.75rem;">Inputs, selects, botones</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">--font-size-h3<br>0.72rem / 600 UP</span>
+      <span style="font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);">TITULO DE CHART CARD</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">--font-size-sm<br>0.6rem / 600 UP</span>
+      <span style="font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);">LABEL DE KPI / TH DE TABLA</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">--font-size-xs<br>0.55rem / 400</span>
+      <span style="font-size:0.55rem;color:var(--text-muted);">Heatmap labels, hints minimos</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       3. ESPACIADO
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>3. Espaciado</h2>
+    <p>Sistema basado en rem. Usar siempre las variables para mantener consistencia.</p>
+    <div class="spacing-demo">
+      <div class="spacing-box"><div class="spacing-visual" style="width:4px;height:20px;"></div><span class="spacing-name">xs 4px</span></div>
+      <div class="spacing-box"><div class="spacing-visual" style="width:8px;height:20px;"></div><span class="spacing-name">sm 8px</span></div>
+      <div class="spacing-box"><div class="spacing-visual" style="width:12px;height:20px;"></div><span class="spacing-name">md 12px</span></div>
+      <div class="spacing-box"><div class="spacing-visual" style="width:16px;height:20px;"></div><span class="spacing-name">lg 16px</span></div>
+      <div class="spacing-box"><div class="spacing-visual" style="width:24px;height:20px;"></div><span class="spacing-name">xl 24px</span></div>
+      <div class="spacing-box"><div class="spacing-visual" style="width:32px;height:20px;"></div><span class="spacing-name">2xl 32px</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       4. BOTONES
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>4. Botones</h2>
+    <p>6 variantes. Todos heredan font-family y tienen transition en hover.</p>
+
+    <div class="component-row" style="margin-bottom:1rem;">
+      <button class="btn btn-primary">Primario</button>
+      <button class="btn btn-secondary">Secundario</button>
+      <button class="btn btn-primary btn-sm">Pequeno</button>
+      <button class="btn-icon">&#9881;</button>
+      <a href="#" class="btn-invgate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Abrir en InvGate
+      </a>
+    </div>
+
+    <div class="code-block">&lt;button class="btn btn-primary"&gt;Primario&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;Secundario&lt;/button&gt;
+&lt;button class="btn btn-primary btn-sm"&gt;Pequeno&lt;/button&gt;
+&lt;button class="btn-icon"&gt;&amp;#9881;&lt;/button&gt;
+&lt;a class="btn-invgate" href="#"&gt;Abrir en InvGate&lt;/a&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       5. KPI CARDS
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>5. KPI Cards</h2>
+    <p>Cards con barra de acento superior. Hover sube la card. Variante <span class="inline-code">.kpi-clickable</span> agrega cursor pointer. Colores del valor via <span class="inline-code">.kpi-value.blue</span>, <span class="inline-code">.green</span>, <span class="inline-code">.red</span>, etc.</p>
+
+    <section class="kpi-row" style="padding:1rem 0;">
+      <div class="kpi-card kpi-clickable" data-action="total">
+        <span class="kpi-label">Total Incidentes</span>
+        <span class="kpi-value blue">6,353</span>
+        <span class="kpi-sub">Ultimos 90 dias</span>
+      </div>
+      <div class="kpi-card kpi-clickable" data-action="open">
+        <span class="kpi-label">Abiertos</span>
+        <span class="kpi-value green">1,248</span>
+        <span class="kpi-sub">En gestion activa</span>
+      </div>
+      <div class="kpi-card kpi-clickable" data-action="sla-breached">
+        <span class="kpi-label">SLA Vencido</span>
+        <span class="kpi-value red">87</span>
+        <span class="kpi-sub">Requieren atencion</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Promedio SLA</span>
+        <span class="kpi-value purple">42%</span>
+        <span class="kpi-sub">% consumido promedio</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Zona Principal</span>
+        <span class="kpi-value cyan">Quito</span>
+        <span class="kpi-sub">342 incidentes</span>
+      </div>
+    </section>
+
+    <div class="code-block">&lt;div class="kpi-card kpi-clickable" data-action="total"&gt;
+  &lt;span class="kpi-label"&gt;Total Incidentes&lt;/span&gt;
+  &lt;span class="kpi-value blue"&gt;6,353&lt;/span&gt;
+  &lt;span class="kpi-sub"&gt;Ultimos 90 dias&lt;/span&gt;
+&lt;/div&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       6. BADGES
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>6. Badges</h2>
+    <p>Pill badges con fondo semitransparente. 3 grupos: prioridad, nivel/tier, SLA.</p>
+
+    <div class="guide-subsection">
+      <h3>Prioridad</h3>
+      <div class="component-row">
+        <span class="badge badge-low">Baja</span>
+        <span class="badge badge-medium">Media</span>
+        <span class="badge badge-high">Alta</span>
+        <span class="badge badge-urgent">Urgente</span>
+        <span class="badge badge-critical">Critica</span>
+      </div>
+    </div>
+
+    <div class="guide-subsection">
+      <h3>Nivel / Tier</h3>
+      <div class="component-row">
+        <span class="badge badge-mesa">Service Desk</span>
+        <span class="badge badge-campo">Campo</span>
+        <span class="badge badge-nivel3">Nivel 3</span>
+        <span class="badge badge-cab">CAB</span>
+        <span class="badge badge-infra">Infra</span>
+        <span class="badge badge-otros">Otros</span>
+      </div>
+    </div>
+
+    <div class="guide-subsection">
+      <h3>SLA</h3>
+      <div class="component-row">
+        <span class="badge badge-sla-ok">En Tiempo</span>
+        <span class="badge badge-sla-risk">En Riesgo</span>
+        <span class="badge badge-sla-breach">Vencido</span>
+      </div>
+    </div>
+
+    <div class="code-block">&lt;span class="badge badge-low"&gt;Baja&lt;/span&gt;
+&lt;span class="badge badge-sla-breach"&gt;Vencido&lt;/span&gt;
+&lt;span class="badge badge-mesa"&gt;Service Desk&lt;/span&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       7. TABS
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>7. Tabs</h2>
+    <p>Navegacion horizontal con border-bottom activo en azul.</p>
+
+    <nav class="tab-nav" style="padding:0;background:transparent;">
+      <button class="tab-btn active">Resumen General</button>
+      <button class="tab-btn">Locales y Cadenas</button>
+      <button class="tab-btn">SLA y Rendimiento</button>
+      <button class="tab-btn">Agentes y Grupos</button>
+      <button class="tab-btn">Estadistica Linux</button>
+    </nav>
+
+    <div class="code-block">&lt;nav class="tab-nav"&gt;
+  &lt;button class="tab-btn active"&gt;Tab Activo&lt;/button&gt;
+  &lt;button class="tab-btn"&gt;Tab Inactivo&lt;/button&gt;
+&lt;/nav&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       8. CHART CARDS + GRID
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>8. Chart Cards y Dashboard Grid</h2>
+    <p>Grid de 3 columnas. Cards con <span class="inline-code">.span-2</span> o <span class="inline-code">.span-3</span> para ocupar mas espacio. Usar <span class="inline-code">&lt;canvas&gt;</span> dentro de <span class="inline-code">.chart-container</span> para Chart.js.</p>
+
+    <section class="dashboard-grid" style="padding:1rem 0;">
+      <div class="chart-card span-2">
+        <h3>Grafico Ancho (span-2)</h3>
+        <div class="chart-container" style="min-height:120px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.75rem;">
+          &lt;canvas id="chartExample"&gt; — Chart.js 4.4.7 aqui
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>Grafico Normal (1 col)</h3>
+        <div class="chart-container" style="min-height:120px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.75rem;">
+          Doughnut / Pie / Bar
+        </div>
+      </div>
+      <div class="chart-card span-3">
+        <h3>Grafico Full Width (span-3)</h3>
+        <div class="chart-container" style="min-height:80px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.75rem;">
+          Tabla o heatmap aqui
+        </div>
+      </div>
+    </section>
+
+    <div class="code-block">&lt;section class="dashboard-grid"&gt;
+  &lt;div class="chart-card span-2"&gt;
+    &lt;h3&gt;Titulo del Grafico&lt;/h3&gt;
+    &lt;div class="chart-container"&gt;
+      &lt;canvas id="myChart"&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       9. TABLAS
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>9. Tablas</h2>
+    <p>Usar <span class="inline-code">.data-table</span> para tablas de datos. Filas clickeables con <span class="inline-code">.clickable-row</span>.</p>
+
+    <div style="max-width:700px;">
+      <table class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Titulo</th><th>SLA</th><th>Prioridad</th><th>Grupo</th><th>Agente</th></tr>
+        </thead>
+        <tbody>
+          <tr class="clickable-row"><td>#6600</td><td>Flujo de cambio de precios</td><td><span class="badge badge-sla-ok">1%</span></td><td><span class="badge badge-low">Baja</span></td><td>Soporte N3 MXP</td><td>Aedra Delgado</td></tr>
+          <tr class="clickable-row"><td>#6598</td><td>Error en caja registradora</td><td><span class="badge badge-sla-breach">120%</span></td><td><span class="badge badge-urgent">Urgente</span></td><td>Mesa de Servicio</td><td>Carlos Ruiz</td></tr>
+          <tr class="clickable-row"><td>#6595</td><td>Solicitud acceso VPN</td><td><span class="badge badge-sla-risk">78%</span></td><td><span class="badge badge-medium">Media</span></td><td>Soporte Campo</td><td>Maria Lopez</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">&lt;table class="data-table"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Titulo&lt;/th&gt;&lt;th&gt;SLA&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr class="clickable-row"&gt;
+      &lt;td&gt;#6600&lt;/td&gt;
+      &lt;td&gt;Flujo de cambio&lt;/td&gt;
+      &lt;td&gt;&lt;span class="badge badge-sla-ok"&gt;1%&lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       10. MODALES
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>10. Modales</h2>
+    <p>Overlay oscuro + card centrada. Tres tamaños: default (950px), <span class="inline-code">.modal-lg</span> (700px), <span class="inline-code">.modal-sm</span> (480px).</p>
+
+    <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.add('visible')">Abrir Modal Demo</button>
+
+    <div class="modal-overlay" id="demoModal">
+      <div class="modal modal-lg">
+        <div class="modal-header">
+          <h2>Detalle del Incidente</h2>
+          <button class="modal-close" onclick="document.getElementById('demoModal').classList.remove('visible')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <a href="#" class="btn-invgate" onclick="event.preventDefault();">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Abrir en InvGate
+          </a>
+          <div class="detail-grid">
+            <div class="detail-item"><label>ID</label><span>CASO (#6600)</span></div>
+            <div class="detail-item"><label>Estado</label><span><span class="badge badge-medium">Abierto</span></span></div>
+            <div class="detail-item"><label>Prioridad</label><span><span class="badge badge-low">Baja</span></span></div>
+            <div class="detail-item"><label>SLA Resolucion</label><span><span class="badge badge-sla-ok">1%</span></span></div>
+            <div class="detail-item"><label>Grupo Asignado</label><span>Soporte N3 MXP</span></div>
+            <div class="detail-item"><label>Agente</label><span>Aedra Delgado</span></div>
+            <div class="detail-item"><label>Cadena</label><span>KFC</span></div>
+            <div class="detail-item"><label>Local</label><span>Quicentro Sur - 027</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">&lt;div class="modal-overlay" id="myModal"&gt;
+  &lt;div class="modal modal-lg"&gt;
+    &lt;div class="modal-header"&gt;
+      &lt;h2&gt;Titulo&lt;/h2&gt;
+      &lt;button class="modal-close"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="modal-body"&gt;
+      &lt;div class="detail-grid"&gt;
+        &lt;div class="detail-item"&gt;
+          &lt;label&gt;Campo&lt;/label&gt;
+          &lt;span&gt;Valor&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       11. FILTROS
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>11. Panel de Filtros</h2>
+    <p>Grid responsivo. Labels uppercase en <span class="inline-code">--text-muted</span>. Inputs con fondo <span class="inline-code">--bg-primary</span>.</p>
+
+    <div class="filter-panel open" style="background:transparent;border:1px solid var(--border-color);border-radius:var(--radius-lg);margin-top:0.5rem;">
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>Fecha Desde</label>
+          <input type="date" value="2026-01-01">
+        </div>
+        <div class="filter-group">
+          <label>Fecha Hasta</label>
+          <input type="date" value="2026-02-20">
+        </div>
+        <div class="filter-group">
+          <label>Grupo Asignado</label>
+          <select>
+            <option>Todos</option>
+            <option>Mesa de Servicio</option>
+            <option>Soporte Campo</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Prioridad</label>
+          <select>
+            <option>Todas</option>
+            <option>Alta</option>
+            <option>Media</option>
+            <option>Baja</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-primary">Aplicar</button>
+          <button class="btn btn-secondary">Limpiar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       12. CHIPS
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>12. Chips / Presets</h2>
+    <p>Usados en multiselect para seleccion rapida. Pill shape, uppercase, azul semitransparente.</p>
+
+    <div class="component-row">
+      <button class="ms-preset-chip">KFC</button>
+      <button class="ms-preset-chip">JUAN VALDEZ</button>
+      <button class="ms-preset-chip">GUS</button>
+      <button class="ms-preset-chip ms-preset-clear">LIMPIAR</button>
+    </div>
+
+    <div class="code-block">&lt;button class="ms-preset-chip"&gt;KFC&lt;/button&gt;
+&lt;button class="ms-preset-chip ms-preset-clear"&gt;LIMPIAR&lt;/button&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       13. INDICADORES
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>13. Indicadores de Estado</h2>
+    <p>Dot pulsante para sync, spinner para loading, banner para errores.</p>
+
+    <div class="component-row" style="gap:2rem;">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <div class="status-dot"></div>
+        <span style="font-size:0.75rem;color:var(--text-secondary);">Sincronizado</span>
+      </div>
+      <div class="spinner"></div>
+      <div class="error-banner visible" style="display:inline-block;border-radius:var(--radius-md);">Error: No se pudo conectar con el servidor</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       14. VERSION BADGE
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>14. Version Badge</h2>
+    <p>Badge inline para mostrar version actual del sistema.</p>
+
+    <div class="component-row">
+      <span class="version-badge">v1.2.0</span>
+      <span class="version-badge">v2.0.0-beta</span>
+    </div>
+
+    <div class="code-block">&lt;span class="version-badge"&gt;v1.2.0&lt;/span&gt;</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       15. PATRON DE BADGE SEMITRANSPARENTE
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section">
+    <h2>15. Patron: Badge Semitransparente</h2>
+    <p>Todos los badges usan el mismo patron: <span class="inline-code">background: rgba(COLOR, 0.15)</span> + <span class="inline-code">color: COLOR</span>. Esto crea un efecto de profundidad consistente sobre fondos oscuros. Para crear un badge nuevo:</p>
+
+    <div class="code-block">/* Patron para badge custom */
+.badge-custom {
+  background: rgba(R, G, B, 0.15);  /* color al 15% opacidad */
+  color: #RRGGBB;                    /* color al 100% */
+}
+
+/* Ejemplo: badge naranja */
+.badge-warning {
+  background: rgba(249, 115, 22, 0.15);
+  color: #f97316;
+}</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="guide-section" style="text-align:center;border-bottom:none;padding:2rem;">
+    <p style="margin:0;">CX Performance Dashboard - Grupo KFC - Guia de Estilos v1.2.0</p>
+    <p style="margin:0.5rem 0 0;font-size:0.65rem;color:var(--text-muted);">
+      Archivos: <span class="inline-code">styles/tokens.css</span> (variables) +
+      <span class="inline-code">styles/components.css</span> (clases) +
+      <span class="inline-code">styles/example.html</span> (esta guia)
+    </p>
+  </div>
+
+</body>
+</html>

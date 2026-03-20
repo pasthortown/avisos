@@ -668,6 +668,9 @@ BEGIN
 
         SELECT @HTML = CONCAT(@HTML, N'<br/><br />'+N' </body>');
 
+        -- INSERT notificación consolidada
+        INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+        VALUES ('A', 'Transferencias', 'pa_Transferencias', @asunto, @HTML, @destinatarios, @fecha_ini, @fecha_fin);
         EXEC msdb.dbo.Sp_send_dbmail
             @profile_name = 'Informacion_Nomina',
             @Subject      = @asunto,
@@ -708,6 +711,9 @@ BEGIN
             IF @w > 0
             BEGIN
                 /* Reutiliza el HTML ya armado arriba (mismo que tu SP). */
+                -- INSERT notificación consolidada
+                INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+                VALUES ('A', 'Transferencias', 'pa_Transferencias', @asunto, @HTML, @w, @destinatarios, @fecha_ini, @fecha_fin);
                 EXEC msdb.dbo.Sp_send_dbmail
                     @profile_name = 'Informacion_Nomina',
                     @Subject      = @asunto,
@@ -737,6 +743,9 @@ BEGIN
 
         IF @html IS NOT NULL
         BEGIN
+            -- INSERT notificación consolidada
+            INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+            VALUES ('A', 'Transferencias', 'pa_Transferencias', @asunto, @html, @w, @destinatarios, @fecha_ini, @fecha_fin);
             EXEC msdb.dbo.Sp_send_dbmail
                 @profile_name = 'Informacion_Nomina',
                 @Subject      = @asunto,

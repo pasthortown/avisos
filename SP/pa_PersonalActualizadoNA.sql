@@ -127,6 +127,9 @@ BEGIN
 
 		SELECT @asunto = REPLACE(@asunto, '@fecha', @fecha)
 
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+		VALUES ('A', 'Trabajadores', 'pa_PersonalActualizadoNA', @asunto, @HTML, @destinatarios, @fi, @ff);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,

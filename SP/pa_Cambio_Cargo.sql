@@ -43,6 +43,9 @@ BEGIN
 		SELECT @body = REPLACE (@body, '@cargo_actual', @desc_actual)
 		SELECT @body = REPLACE (@body, '@fbaja', ISNULL(CONVERT(varchar(22), @fecha_baja, 105),'No tiene fecha de baja'))
 		BEGIN TRY
+			-- INSERT notificación consolidada
+			INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios)
+			VALUES ('A', 'Cambios', 'pa_Cambio_Cargo', @asunto, @body, @Dirigido);
 			EXEC msdb.dbo.Sp_send_dbmail
 			@profile_name = 'Informacion_Nomina',
 			@Subject = @asunto,

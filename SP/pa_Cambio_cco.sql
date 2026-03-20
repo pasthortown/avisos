@@ -64,6 +64,9 @@ BEGIN
 	SELECT @TransactionName = 'CambioCCOAsociado';  
 	BEGIN TRAN @TransactionName;  
 	BEGIN TRY
+		-- INSERT notificación consolidada
+		INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+		VALUES ('A', 'Cambios', 'pa_Cambio_cco', @asunto, @body, @Dirigido, @fecha_ini, @fecha_fin);
 		EXEC msdb.dbo.Sp_send_dbmail
 		@profile_name = 'Informacion_Nomina',
 		@Subject = @asunto,

@@ -411,6 +411,9 @@ BEGIN
 
 
 						--/*		ENVIO DE CORREO GENERAL		*/
+						-- INSERT notificación consolidada
+						INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, destinatarios, periodoInicio, periodoFin)
+						VALUES ('A', 'Ausencias', 'pa_enfermedadconsecutiva', @asunto, @HTML, @destinatarios, @fi, @ff);
 						EXEC msdb.dbo.sp_send_dbmail 
 						@profile_name='Informacion_Nomina',
 						@recipients= @destinatarios, 		
@@ -479,6 +482,9 @@ BEGIN
 												SET @archivo = N''+ convert(varchar(12),GETDATE(), 105) + ' - EnfermedadDiasLibresConsecutivos.csv';
 												-- SET @archivo = N'PermisosDiasLibres.csv';
 
+												-- INSERT notificación consolidada
+												INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+												VALUES ('A', 'Ausencias', 'pa_enfermedadconsecutiva', @asunto, @HTML, @w, 'pasante.nominadosec@kfc.com.ec', @fi, @ff);
 												EXEC msdb.dbo.sp_send_dbmail 
 												@profile_name='Informacion_Nomina',
 												-- @recipients= 'pasante.nominadosec@kfc.com.ec', 
@@ -524,6 +530,9 @@ BEGIN
 							+N'<br/><br />'
 							+N' </body>' 
 
+							-- INSERT notificación consolidada
+							INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+							VALUES ('A', 'Ausencias', 'pa_enfermedadconsecutiva', 'Alerta - Enfermedad, días libres consecutivos', @HTML, @w, 'pasante.nominadosec@kfc.com.ec', @fi, @ff);
 							EXEC msdb.dbo.sp_send_dbmail 
 							@profile_name='Informacion_Nomina',
 							-- @recipients= 'pasante.nominadosec@kfc.com.ec', 	
@@ -542,6 +551,9 @@ BEGIN
 							+N'<br/><br />'
 							+N' </body>' 
 
+						-- INSERT notificación consolidada
+						INSERT INTO Avisos.notificacionesConsolidadas (estado, origen, spOrigen, asunto, descripcionHtml, cantidadRegistros, destinatarios, periodoInicio, periodoFin)
+						VALUES ('A', 'Ausencias', 'pa_enfermedadconsecutiva', 'Alerta - Enfermedad, días libres consecutivos', @HTML, @w, 'pasante.nominadosec@kfc.com.ec', @fi, @ff);
 						EXEC msdb.dbo.sp_send_dbmail 
 							@profile_name='Informacion_Nomina',
 							-- @recipients= 'pasante.nominadosec@kfc.com.ec', 	
